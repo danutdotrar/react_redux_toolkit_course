@@ -6,16 +6,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // create initial state
-const initialState = { post: "" };
+const initialState = [
+    {
+        id: 1,
+        title: "Learning Redux Toolkit",
+        content: "Great state management stuff",
+    },
+    {
+        id: 2,
+        title: "Slices",
+        content: "(Pizza) slices are great!",
+    },
+];
 
 // create Slice
 const postsSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: { addPost: (state) => (state.post += 1) },
+    reducers: {
+        postAdded(state, action) {
+            state.push(action.payload); // the payload will be the form data
+        },
+    },
 });
 
-// export both actions and reducer
-export const { addPost } = postsSlice.actions;
+// select all posts from slice for export
+export const selectAllPosts = (state) => state.posts;
 
+// export both actions and reducer
+export const { postAdded } = postsSlice.actions;
+
+// export the full slice reducer
 export default postsSlice.reducer;
