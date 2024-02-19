@@ -34,6 +34,8 @@ const AddPostForm = () => {
         // setPostData({ title: "", content: "" });
 
         dispatch(postAdded(title, content));
+        setTitle("");
+        setContent("");
     };
 
     return (
