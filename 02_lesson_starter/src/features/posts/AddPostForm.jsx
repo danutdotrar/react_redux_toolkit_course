@@ -1,19 +1,39 @@
 import { useState } from "react";
 import { postAdded } from "./postsSlice";
 import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 
 const AddPostForm = () => {
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [content, setContent] = useState("");
+
+    // const onTitleChange = (e) => {
+    //     setTitle(e.target.value);
+    // };
+
+    // const onContentChange = (e) => {
+    //     setContent(e.target.value);
+    // };
+
+    const [postData, setPostData] = useState({ title: "", content: "" });
 
     const dispatch = useDispatch();
 
-    const onTitleChange = (e) => {
-        setTitle(e.target.value);
+    const { title, content } = postData;
+
+    const onChange = (e) => {
+        setPostData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
     };
 
-    const onContentChange = (e) => {
-        setContent(e.target.value);
+    const onSavePostClicked = () => {
+        if (title && content) {
+            dispatch(postAdded({ id: nanoid(), ...postData }));
+        }
+
+        setPostData({ title: "", content: "" });
     };
 
     return (
@@ -24,22 +44,19 @@ const AddPostForm = () => {
                 <input
                     type="text"
                     id="postTitle"
-                    name="postTitle"
+                    name="title"
                     value={title}
-                    onChange={onTitleChange}
+                    onChange={onChange}
                 />
                 <label htmlFor="postContent">Content:</label>
                 <input
                     type="text"
                     id="postContent"
-                    name="postContent"
+                    name="content"
                     value={content}
-                    onChange={onContentChange}
+                    onChange={onChange}
                 />
-                <button
-                    type="button"
-                    onClick={() => dispatch(postAdded({ title, content }))}
-                >
+                <button type="button" onClick={onSavePostClicked}>
                     Save Post
                 </button>
             </form>
