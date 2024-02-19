@@ -3,7 +3,7 @@
 // Slice este o colectie de logica si actiuni pentru un singur feature al aplicatiei
 
 // import createSlice
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 // create initial state
 const initialState = [
@@ -25,8 +25,13 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        postAdded(state, action) {
-            state.push(action.payload); // the payload will be the form data
+        postAdded: {
+            reducer(state, action) {
+                state.push(action.payload); // the payload will be the form data
+            },
+            prepare(title, content) {
+                return { payload: { id: nanoid(), title, content } };
+            },
         },
     },
 });

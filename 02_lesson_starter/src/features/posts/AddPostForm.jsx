@@ -4,36 +4,36 @@ import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 
 const AddPostForm = () => {
-    // const [title, setTitle] = useState("");
-    // const [content, setContent] = useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
-    // const onTitleChange = (e) => {
-    //     setTitle(e.target.value);
-    // };
+    const onTitleChange = (e) => {
+        setTitle(e.target.value);
+    };
 
-    // const onContentChange = (e) => {
-    //     setContent(e.target.value);
-    // };
+    const onContentChange = (e) => {
+        setContent(e.target.value);
+    };
 
-    const [postData, setPostData] = useState({ title: "", content: "" });
+    // const { title, content } = postData;
+    // const [postData, setPostData] = useState({ title: "", content: "" });
 
     const dispatch = useDispatch();
 
-    const { title, content } = postData;
-
-    const onChange = (e) => {
-        setPostData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
-        }));
-    };
+    // const onChange = (e) => {
+    //     setPostData((prevState) => ({
+    //         ...prevState,
+    //         [e.target.name]: e.target.value,
+    //     }));
+    // };
 
     const onSavePostClicked = () => {
-        if (title && content) {
-            dispatch(postAdded({ id: nanoid(), ...postData }));
-        }
+        // if (title && content) {
+        //     dispatch(postAdded({ id: nanoid(), ...postData }));
+        // }
+        // setPostData({ title: "", content: "" });
 
-        setPostData({ title: "", content: "" });
+        dispatch(postAdded(title, content));
     };
 
     return (
@@ -46,7 +46,7 @@ const AddPostForm = () => {
                     id="postTitle"
                     name="title"
                     value={title}
-                    onChange={onChange}
+                    onChange={onTitleChange}
                 />
                 <label htmlFor="postContent">Content:</label>
                 <input
@@ -54,7 +54,7 @@ const AddPostForm = () => {
                     id="postContent"
                     name="content"
                     value={content}
-                    onChange={onChange}
+                    onChange={onContentChange}
                 />
                 <button type="button" onClick={onSavePostClicked}>
                     Save Post
