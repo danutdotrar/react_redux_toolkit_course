@@ -20,6 +20,7 @@ const initialState = [
 ];
 
 // create Slice
+// inisde createSlice we can mutate the state thanks to Immer.js that works under the hood
 const postsSlice = createSlice({
     name: "posts",
     initialState,
