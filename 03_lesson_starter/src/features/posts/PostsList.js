@@ -6,6 +6,7 @@ import {
     getPostsStatus,
     fetchPosts,
 } from "./postsSlice";
+
 import PostsExcerpt from "./PostsExcerpt";
 
 const PostsList = () => {
