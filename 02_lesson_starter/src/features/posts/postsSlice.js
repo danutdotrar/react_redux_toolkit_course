@@ -9,21 +9,35 @@ import { sub } from "date-fns";
 // create initial state
 const initialState = [
     {
-        id: 1,
+        id: "1",
         title: "Learning Redux Toolkit",
         content: "Great state management stuff",
         date: sub(new Date(), { minutes: 10 }).toISOString(),
+        reactions: {
+            thumbsUp: 0,
+            wow: 0,
+            heart: 0,
+            rocket: 0,
+            coffee: 0,
+        },
     },
     {
-        id: 2,
+        id: "2",
         title: "Slices",
         content: "(Pizza) slices are great!",
         date: sub(new Date(), { minutes: 5 }).toISOString(),
+        reactions: {
+            thumbsUp: 0,
+            wow: 0,
+            heart: 0,
+            rocket: 0,
+            coffee: 0,
+        },
     },
 ];
 
 // create Slice
-// inisde createSlice we can mutate the state thanks to Immer.js that works under the hood
+// inisde createSlice we can mutate the state thanks to Immer.js that works under the hood that assures that we are not mutating the state
 const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -40,9 +54,24 @@ const postsSlice = createSlice({
                         content,
                         date: new Date().toISOString(),
                         userId,
+                        reactions: {
+                            thumbsUp: 0,
+                            wow: 0,
+                            heart: 0,
+                            rocket: 0,
+                            coffee: 0,
+                        },
                     },
                 };
             },
+        },
+        reactionAdded(state, action) {
+            const { postId, reaction } = action.payload;
+            const existingPost = state.find((post) => post.id === postId);
+
+            if (existingPost) {
+                existingPost.reactions[reaction]++;
+            }
         },
     },
 });
@@ -51,7 +80,7 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts;
 
 // export both actions and reducer
-export const { postAdded } = postsSlice.actions;
+export const { postAdded, reactionAdded } = postsSlice.actions;
 
 // export the full slice reducer
 export default postsSlice.reducer;
