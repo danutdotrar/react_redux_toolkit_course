@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllPosts } from "./postsSlice";
+import PostAuthor from "./PostAuthor";
 
 const PostList = () => {
     // select the state
@@ -13,6 +14,7 @@ const PostList = () => {
         <article key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.content.substring(0, 100)}</p>
+            <PostAuthor userId={post.userId} />
         </article>
     ));
 

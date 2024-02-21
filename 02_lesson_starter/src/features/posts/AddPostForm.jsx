@@ -46,7 +46,7 @@ const AddPostForm = () => {
         setContent("");
     };
 
-    const canSave = Boolean(title) && Boolean(content) && Boolean(title);
+    const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
 
     const usersOptions = users.map((user) => (
         <option key={user.id} value={user.id}>
@@ -85,7 +85,11 @@ const AddPostForm = () => {
                     value={content}
                     onChange={onContentChange}
                 />
-                <button type="button" onClick={onSavePostClicked}>
+                <button
+                    type="button"
+                    onClick={onSavePostClicked}
+                    disabled={!canSave}
+                >
                     Save Post
                 </button>
             </form>
