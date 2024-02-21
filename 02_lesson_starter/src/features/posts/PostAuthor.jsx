@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import React from "react";
 import { selectAllUsers } from "../users/usersSlice";
 
 const PostAuthor = ({ userId }) => {

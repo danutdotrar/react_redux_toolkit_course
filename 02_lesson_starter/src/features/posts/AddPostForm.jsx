@@ -23,25 +23,13 @@ const AddPostForm = () => {
         setUserId(e.target.value);
     };
 
-    // const { title, content } = postData;
-    // const [postData, setPostData] = useState({ title: "", content: "" });
-
     const dispatch = useDispatch();
 
-    // const onChange = (e) => {
-    //     setPostData((prevState) => ({
-    //         ...prevState,
-    //         [e.target.name]: e.target.value,
-    //     }));
-    // };
-
     const onSavePostClicked = () => {
-        // if (title && content) {
-        //     dispatch(postAdded({ id: nanoid(), ...postData }));
-        // }
-        // setPostData({ title: "", content: "" });
+        if (title && content) {
+            dispatch(postAdded(title, content, userId));
+        }
 
-        dispatch(postAdded(title, content, userId));
         setTitle("");
         setContent("");
     };
