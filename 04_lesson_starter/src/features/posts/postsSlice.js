@@ -23,6 +23,15 @@ export const addNewPost = createAsyncThunk(
     }
 );
 
+export const updatePost = createAsyncThunk(
+    "posts/updatePost",
+    async (initialPost) => {
+        const { id } = initialPost;
+        const respone = await axios.put(`${POSTS_URL}/${id}`, initialPost);
+        return respone.data;
+    }
+);
+
 const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -112,6 +121,17 @@ const postsSlice = createSlice({
                 };
                 console.log(action.payload);
                 state.posts.push(action.payload);
+            })
+            .addCase(updatePost.fulfilled, (state, action) => {
+                if (!action.payload?.id) {
+                    console.log("Update could not complete");
+                    console.log(action.payload);
+                    return;
+                }
+                const { id } = action.payload;
+                action.payload.date = new Date().toISOString();
+                // filter out the posts that doesnt have the same id
+                const posts = state.posts.filter((post) => post.id !== id);
             });
     },
 });
