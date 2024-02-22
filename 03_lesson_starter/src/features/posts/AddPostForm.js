@@ -27,8 +27,13 @@ const AddPostForm = () => {
             try {
                 // call addNewPost from slice
                 dispatch(addNewPost({ title, body: content, userId })).unwrap();
+                setTitle("");
+                setContent("");
+                setUserId("");
             } catch (error) {
                 return error.message;
+            } finally {
+                setAddRequestStatus("idle");
             }
         }
     };
