@@ -132,6 +132,7 @@ const postsSlice = createSlice({
                 action.payload.date = new Date().toISOString();
                 // filter out the posts that doesnt have the same id
                 const posts = state.posts.filter((post) => post.id !== id);
+                state.posts = [...posts, action.payload];
             });
     },
 });
