@@ -33,6 +33,11 @@ export const updatePost = createAsyncThunk(
     }
 );
 
+// create slice with actions in reducers and extraReducers
+// prepare este o functie speciala folosita sa customizeze action.payload inainte sa fie atribuita reducerului
+// prepare ofera o structura state-ului
+// Prepare specifica cum anume ar trebui actualizat state-ul cand actiunea este executata/dispatched
+// Prepare pregateste datele necesare pentru actiunea postAdded
 const postsSlice = createSlice({
     name: "posts",
     initialState,
