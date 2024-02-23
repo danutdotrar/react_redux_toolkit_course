@@ -4,6 +4,7 @@ import axios from "axios";
 
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
+// create initialState
 const initialState = {
     posts: [],
     status: "idle", //'idle' | 'loading' | 'succeeded' | 'failed'
